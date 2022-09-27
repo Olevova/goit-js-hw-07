@@ -10,9 +10,10 @@ function makeGallery(gallery) {
     <div class="gallery__item">
   <a class="gallery__link" href="${original}">
     <img
-      class="gallery__image"
+      loading="lazy"
+       class="gallery__image"
       src="${preview}"
-      data-source="large-image.jpg"
+      data-source="${original}"
       alt="${description}"
     />
   </a>
@@ -20,6 +21,24 @@ function makeGallery(gallery) {
       `).join("")
   }
 
-
+//  
 
 console.log(siteGallery);
+
+galleryEl.addEventListener("click", makeDigImg)
+
+function makeDigImg(event) {
+  event.preventDefault()
+  if (event.target.nodeName !== "IMG") {
+    console.log(event.target.dataset)
+    const imgW = event.target.querySelector(".gallery__image")
+    console.log(event.target.source);
+    return
+  }
+  console.log(event.target.dataset.source);
+  const instance = basicLightbox.create( `<img
+      src = "${event.target.dataset.source}" width = 400
+    />`)
+  
+  instance.show();
+}
