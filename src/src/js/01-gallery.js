@@ -1,10 +1,9 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
 const galleryEl = document.querySelector(".gallery")
-const siteGallery = makeGallery(galleryItems)
-galleryEl.insertAdjacentHTML("beforeend", siteGallery)
 
 
+// Створюємо функцію для створення розмітки, та рендеремо її у галерею
 function makeGallery(gallery) {
     return gallery.map(({ preview, original, description }) => `
     <div class="gallery__item">
@@ -20,25 +19,35 @@ function makeGallery(gallery) {
 </div>
       `).join("")
   }
+const siteGallery = makeGallery(galleryItems)
+galleryEl.insertAdjacentHTML("beforeend", siteGallery)
 
 //  
 
-console.log(siteGallery);
+// console.log(galleryEl);
+
+// Створюємо галерею за дапомогою Lightbox
 
 galleryEl.addEventListener("click", makeDigImg)
 
 function makeDigImg(event) {
   event.preventDefault()
   if (event.target.nodeName !== "IMG") {
-    console.log(event.target.dataset)
-    const imgW = event.target.querySelector(".gallery__image")
-    console.log(event.target.source);
     return
   }
-  console.log(event.target.dataset.source);
-  const instance = basicLightbox.create( `<img
-      src = "${event.target.dataset.source}" width = 400
+  const instance = basicLightbox.create(`<img
+      src = "${event.target.dataset.source}" width="800" height="600"
     />`)
-  
   instance.show();
+  
+
+  document.addEventListener("keydown", function closePicture (event){
+    console.log(event.key, event.code);
+    if (event.code !== "Escape") {
+      return
+    }
+    instance.close()
+    document.removeEventListener("keydown", closePicture)
+  });
+  
 }
