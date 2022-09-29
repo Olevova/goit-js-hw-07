@@ -22,9 +22,6 @@ function makeGallery(gallery) {
 const siteGallery = makeGallery(galleryItems)
 galleryEl.insertAdjacentHTML("beforeend", siteGallery)
 
-//  
-
-// console.log(galleryEl);
 
 // Створюємо галерею за дапомогою Lightbox
 

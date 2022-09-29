@@ -29,20 +29,20 @@ class ImgGallery{
     }
 }
 
+//створюємо саму галерею
 
 const myGallery = new ImgGallery(galleryItems);
 console.log(myGallery.makeGallery(galleryEl))
 
 
-galleryEl.addEventListener("click",my)
+galleryEl.addEventListener("click", onClickImgMakeGallery)
 
-function my (event) {
+function onClickImgMakeGallery (event) {
     event.preventDefault();
     if(event.target.nodeName !== "IMG") {
     return
   }
-    console.log("hi");
-    let gallery = new SimpleLightbox('.gallery a',{captionsData:"alt"});
+    let gallery = new SimpleLightbox('.gallery a',{captionsData:"alt", captionDelay: 250});
     gallery.on('show.simplelightbox')
     
 }
